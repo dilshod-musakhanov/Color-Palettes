@@ -44,8 +44,9 @@ svg {
   width: 80%;
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
-  /*transform: translateY(100px);*/
-  /*opacity: 0;*/
+  transform: translateY(100px);
+  opacity: 0;
+  pointer-events: none;
   transition: all 0.5s ease-in-out;
 }
 .sliders.active {
