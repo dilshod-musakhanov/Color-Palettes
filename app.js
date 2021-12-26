@@ -51,7 +51,7 @@ function randomColors() {
         colorizeSliders(color,hue,brightness,saturation);
     });
 
-    //reset inputs
+    //reset inputs so slider range will be updated as per bg color
     resetInputs();
 }
 
@@ -94,7 +94,7 @@ function hslControls(e) {
     const saturation = sliders[2]; 
     
     const bgColor = initialColors[index];
-    console.log(bgColor);
+
     
     let color = chroma(bgColor)
         .set('hsl.s', saturation.value)
@@ -102,6 +102,8 @@ function hslControls(e) {
         .set('hsl.h', hue.value)
 
         colorDivs[index].style.backgroundColor = color; 
+        //colorize inputs/sliders
+        colorizeSliders(color, hue, brightness, saturation);
 }
 function updateTextUI(index) {
     const activeDiv = colorDivs[index];
