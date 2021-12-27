@@ -7,11 +7,14 @@ const popup = document.querySelector(".copy-container");
 const adjustButton = document.querySelectorAll(".adjust");
 const closeAdjustments = document.querySelectorAll(".close-adjustment");
 const sliderContainers =document.querySelectorAll(".sliders");
+const lockButton = document.querySelectorAll(".lock");
 let initialColors;
 
 
 
 // event listeners 
+generateBtn.addEventListener("click", randomColors);
+
 sliders.forEach(slider => {
     slider.addEventListener("input", hslControls);
 }); 
@@ -43,8 +46,16 @@ adjustButton.forEach((button,index) => {
 closeAdjustments.forEach((button, index) => {
     button.addEventListener("click", () => {
         closejustmentPanel(index);
-    } )
+    })
 })
+
+lockButton.forEach((button, index) => {
+    button.addEventListener("click", e => {
+      lockLayer(e, index);
+    });
+  });
+
+
 
 // color generator
 function generateHex(){
@@ -55,12 +66,18 @@ function generateHex(){
 function randomColors() {
 
     initialColors = []
+
     colorDivs.forEach((div,index) =>{
         const hexText = div.children[0];
         const randomColor = generateHex();
         //add to the array
-        initialColors.push(chroma(randomColor).hex());
-
+        if(div.classList.contains("locked")){
+            initialColors.push(hexText.innerText);
+            return;
+        }else{
+            initialColors.push(chroma(randomColor).hex());
+        }
+        
         //add color to the background
         div.style.backgroundColor = randomColor;
         hexText.innerText = randomColor;
@@ -80,6 +97,12 @@ function randomColors() {
 
     //reset inputs so slider range will be updated as per bg color
     resetInputs();
+
+    //check for button contrast
+    adjustButton.forEach((button, index) => {
+       checkTextContrast(initialColors[index], button);
+       checkTextContrast(initialColors[index], lockButton[index]);
+    })
 }
 
 function checkTextContrast(color,text){
@@ -191,5 +214,16 @@ function openAdjustmentPanel(index) {
 function closejustmentPanel(index) {
     sliderContainers[index].classList.remove("active");
 }
+function lockLayer(e, index) {
+    const lockSVG = e.target.children[0];
+    const activeBg = colorDivs[index];
+    activeBg.classList.toggle("locked");
+  
+    if (lockSVG.classList.contains("fa-lock-open")) {
+      e.target.innerHTML = '<i class="fas fa-lock"></i>';
+    } else {
+      e.target.innerHTML = '<i class="fas fa-lock-open"></i>';
+    }
+  }
 
 randomColors();
