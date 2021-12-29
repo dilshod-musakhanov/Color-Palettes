@@ -10,6 +10,7 @@ body {
 button {
   font-family: "Mulish", sans-serif;
 }
+
 path,
 i,
 svg {
@@ -49,6 +50,7 @@ svg {
   pointer-events: none;
   transition: all 0.5s ease-in-out;
 }
+
 .sliders.active {
   opacity: 1;
   transform: translateY(0px);
@@ -68,6 +70,7 @@ svg {
   cursor: pointer;
   font-weight: bold;
 }
+
 .controls {
   display: flex;
   flex-direction: column;
@@ -88,6 +91,7 @@ svg {
   color: white;
   cursor: pointer;
 }
+
 .panel p {
   font-size: 1.2rem;
 }
@@ -98,6 +102,7 @@ svg {
   flex-direction: column;
   align-items: center;
 }
+
 .adjust,
 .lock {
   font-size: 2rem;
@@ -106,6 +111,8 @@ svg {
   cursor: pointer;
   margin: 2rem 0rem;
 }
+
+/* Slider Stuff */
 input[type="range"] {
   -webkit-appearance: none;
   margin: 1rem 0rem;
@@ -114,6 +121,7 @@ input[type="range"] {
   border-radius: 1rem;
   cursor: pointer;
 }
+
 .copy-container,
 .save-container,
 .library-container {
@@ -125,7 +133,7 @@ input[type="range"] {
   height: 100%;
   display: flex;
   justify-content: center;
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
   align-items: center;
   opacity: 0;
   pointer-events: none;
@@ -136,6 +144,7 @@ input[type="range"] {
   opacity: 1;
   pointer-events: all;
 }
+
 .copy-popup,
 .save-popup,
 .library-popup {
@@ -157,7 +166,7 @@ input[type="range"] {
 }
 .copy-popup h4,
 .save-popup h4,
-.library-popup {
+.library-popup h4 {
   font-size: 2rem;
   padding: 2rem;
 }
@@ -167,8 +176,12 @@ input[type="range"] {
   padding: 0.5rem;
 }
 
-.submit-save,
-.pick-palette-btn {
+.close-save {
+  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  padding: 0.5rem;
+}
+.submit-save {
   margin: 2rem;
   padding: 1rem 2rem;
   background: rgb(25, 25, 83);
@@ -176,13 +189,6 @@ input[type="range"] {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-}
-.library-popup {
-  min-width: 40%;
-  padding: 1rem;
-  justify-content: flex-start;
-  overflow-y: scroll;
-  max-height: 50vh;
 }
 .close-library {
   position: absolute;
@@ -196,21 +202,39 @@ input[type="range"] {
   cursor: pointer;
   font-weight: bold;
 }
-.custom-palatte {
+
+.library-popup {
+  min-width: 40%;
+  padding: 1rem;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  max-height: 50vh;
+}
+.custom-palette {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
-  padding: 2rem;
+  padding: 0.5rem;
 }
 .small-preview {
   display: flex;
   flex: 1;
 }
-.custom-palatte h4 {
+.custom-palette h4 {
   flex: 1;
 }
+
 .small-preview div {
-  height: 2rem;
+  height: 3rem;
   flex: 1;
+}
+.pick-palette-btn {
+  height: 3rem;
+  border: none;
+  padding: 1rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  background: rgb(41, 41, 41);
+  color: white;
 }
